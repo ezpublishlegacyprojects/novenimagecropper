@@ -29,7 +29,7 @@
 		<replace dir="${build.dir.dist}" token="@@@VERSION@@@" value="${build.version}">
 			<include name="**/*.php"/>
 		</replace>
-		<zip destfile="${build.dir}/noveniniupdate.zip" basedir="${build.dir.dist}" excludes="ant/**"/>
+		<zip destfile="${build.dir}/novenimagecropper.zip" basedir="${build.dir.dist}" excludes="novenimagecropper/ant/**"/>
 	</target>
 
 	<target name="export" description="Exports the extension via SVN">

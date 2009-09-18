@@ -31,9 +31,14 @@ var dialogLoader = null;
 var divPreview = null;
 var jcrop = null; // Instance of jcrop
 var imageReference = null;
+var URLPrefix = '';
 
 $(document).ready(function() {
 	
+	// Do we have index.php in the URL ?
+	if(document.location.href.indexOf('index.php') != -1)
+		URLPrefix = '/index.php';
+
 	/**
 	 * AJAX image upload handler
 	 * @uses AjaxUpload - http://valums.com/ajax-upload/
@@ -45,7 +50,7 @@ $(document).ready(function() {
 		var contentObjectVersion = $(this).attr('ez_contentobject_version');
 		var contentObjectId = $(this).attr('ez_contentobject_id');
 		new AjaxUpload($(this), {
-			action: '/novimagecrop/upload',
+			action: URLPrefix+'/novimagecrop/upload',
 			name: 'imageFile',
 			data: {
 				'BaseName': baseName,
@@ -93,7 +98,7 @@ $(document).ready(function() {
 		divDialog.dialog('open');
 		
 		// Loading the reference image
-		var urlReference = '/novimagecrop/refreshimage/'+currentAttributeID+'/'+currentAttributeVersion+'/(mode)/imagereference?'+(new Date()).getTime();
+		var urlReference = URLPrefix+'/novimagecrop/refreshimage/'+currentAttributeID+'/'+currentAttributeVersion+'/(mode)/imagereference?'+(new Date()).getTime();
 		divReference.load(urlReference, {}, function() {
 			dialogLoader.hide();
 			imageReference = divReference.find('img:first');
@@ -120,7 +125,7 @@ $(document).ready(function() {
 	 * Handle Preview
 	 */
 	$('input.novenimagecropper_previewbutton').click(function() {
-		var urlPreview = '/novimagecrop/crop/'+currentAttributeID+'/'+currentAttributeVersion+'/(mode)/preview?'+(new Date()).getTime();
+		var urlPreview = URLPrefix+'/novimagecrop/crop/'+currentAttributeID+'/'+currentAttributeVersion+'/(mode)/preview?'+(new Date()).getTime();
 		var params = {
 			'x': getCropValue('x'),
 			'y': getCropValue('y'),
@@ -153,7 +158,7 @@ $(document).ready(function() {
 	});
 	
 	$('input.novenimagecropper_savebutton').click(function() {
-		var urlCrop = '/novimagecrop/crop/'+currentAttributeID+'/'+currentAttributeVersion+'/(mode)/do?'+(new Date()).getTime();
+		var urlCrop = URLPrefix+'/novimagecrop/crop/'+currentAttributeID+'/'+currentAttributeVersion+'/(mode)/do?'+(new Date()).getTime();
 		var params = {
 			'x': getCropValue('x'),
 			'y': getCropValue('y'),
@@ -209,12 +214,12 @@ function closeDialog() {
  * Delete temporary cropped image for preview
  */
 function deleteTmpImage() {
-	var url = '/novimagecrop/deletetmpimage/'+currentAttributeID+'/'+currentAttributeVersion;
+	var url = URLPrefix+'/novimagecrop/deletetmpimage/'+currentAttributeID+'/'+currentAttributeVersion;
 	$.get(url);
 }
 
 function refreshImageDetails(attributeId, contentObjectVersion, contentObjectId) {
-	$('#imageinfos_'+attributeId).load('/novimagecrop/refreshimage/'+attributeId+'/'+contentObjectVersion+'/'+contentObjectId+'?'+(new Date()).getTime());
+	$('#imageinfos_'+attributeId).load(URLPrefix+'/novimagecrop/refreshimage/'+attributeId+'/'+contentObjectVersion+'/'+contentObjectId+'?'+(new Date()).getTime());
 	
 	var buttonCrop = $('#novimagecroptrigger_'+attributeId+'_'+contentObjectVersion); 
 	buttonCrop.removeClass('button-deleted');

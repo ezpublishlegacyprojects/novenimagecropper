@@ -1,6 +1,6 @@
 //
 // ## BEGIN COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
-// SOFTWARE NAME: Noven Image Uploader
+// SOFTWARE NAME: Noven Image Cropper
 // SOFTWARE RELEASE: @@@VERSION@@@
 // COPYRIGHT NOTICE: Copyright (C) 2009 - Jerome Vieilledent, Noven.
 // SOFTWARE LICENSE: GNU General Public License v2.0

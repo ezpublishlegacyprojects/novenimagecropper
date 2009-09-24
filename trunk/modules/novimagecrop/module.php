@@ -39,33 +39,3 @@ $ViewList['upload'] = array(
 	'single_post_actions'		=> 	array(),
 	'post_action_parameters'	=> 	array()
 );
-
-/**
- * AJAX image infos refresh
- */
-$ViewList['refreshimage'] = array(
-	'script'					=>	'refreshimage.php',
-	'params'					=> 	array('AttributeID', 'ContentObjectVersion', 'ContentObjectID'),
-	'unordered_params'			=> 	array(
-		'mode'		=> 'DisplayMode'
-	),	
-	'single_post_actions'		=> 	array(),
-	'post_action_parameters'	=> 	array()
-);
-
-$ViewList['crop'] = array(
-	'script'					=>	'crop.php',
-	'params'					=> 	array('AttributeID', 'ContentObjectVersion'),
-	'unordered_params'			=> 	array(
-		'mode'		=> 'Mode'
-	),	
-	'single_post_actions'		=> 	array(),
-	'post_action_parameters'	=> 	array()
-);
-
-$ViewList['deletetmpimage'] = array(
-	'script'					=>	'deletetmpimage.php',
-	'params'					=> 	array('AttributeID', 'ContentObjectVersion'),
-	'single_post_actions'		=> 	array(),
-	'post_action_parameters'	=> 	array()
-);

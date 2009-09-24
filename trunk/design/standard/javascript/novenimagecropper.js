@@ -35,10 +35,7 @@ var URLPrefix = '';
 
 $(document).ready(function() {
 	
-	// Do we have index.php in the URL ?
-	if(document.location.href.indexOf('index.php') != -1)
-		URLPrefix = '/index.php';
-
+	
 	/**
 	 * AJAX image upload handler
 	 * @uses AjaxUpload - http://valums.com/ajax-upload/
@@ -49,24 +46,38 @@ $(document).ready(function() {
 		var attributeId = aImageInfos[1];
 		var contentObjectVersion = $(this).attr('ez_contentobject_version');
 		var contentObjectId = $(this).attr('ez_contentobject_id');
-		new AjaxUpload($(this), {
-			action: URLPrefix+'/novimagecrop/upload',
-			name: 'imageFile',
-			data: {
-				'BaseName': baseName,
-				'AttributeID': attributeId,
-				'ContentObjectVersion': contentObjectVersion,
-				'ContentObjectID' : contentObjectId 
-			},
-			onSubmit : function() {
-				$('#novenimageloading_'+attributeId).show(); // Display loader
-			},
-			onComplete : function(file) {
-				// Hide loader and refresh image infos
-				$('#novenimageloading_'+attributeId).hide();
-				refreshImageDetails(attributeId, contentObjectVersion, contentObjectVersion);
-			}
+		var curEl = $(this);
+		
+		// Get the URLPrefix (only for AJAX upload feature)
+		$.ez('novimgcrop::getURLPrefix', function(data) {
+			URLPrefix = data.content;
+			new AjaxUpload(curEl, {
+				action: URLPrefix+'novimagecrop/upload',
+				name: 'imageFile',
+				data: {
+					'BaseName': baseName,
+					'AttributeID': attributeId,
+					'ContentObjectVersion': contentObjectVersion,
+					'ContentObjectID' : contentObjectId 
+				},
+				onSubmit : function(file, ext) {
+					$('#novenimageloading_'+attributeId).show(); // Display loader
+					$('#novenimagemimetypeerror_'+attributeId).hide(); // Hide errors
+					if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){
+						// extension is not allowed, cancel upload
+						$('#novenimageloading_'+attributeId).hide();
+						$('#novenimagemimetypeerror_'+attributeId).show();
+                        return false;
+					}
+				},
+				onComplete : function(file) {
+					// Hide loader and refresh image infos
+					$('#novenimageloading_'+attributeId).hide();
+					refreshImageDetails(attributeId, contentObjectVersion, contentObjectVersion);
+				}
+			});
 		});
+		
 	});
 	
 	$('.novenimagecropdialog').dialog({
@@ -98,8 +109,9 @@ $(document).ready(function() {
 		divDialog.dialog('open');
 		
 		// Loading the reference image
-		var urlReference = URLPrefix+'/novimagecrop/refreshimage/'+currentAttributeID+'/'+currentAttributeVersion+'/(mode)/imagereference?'+(new Date()).getTime();
-		divReference.load(urlReference, {}, function() {
+		var urlReference = 'novimgcrop::imageReference::'+currentAttributeID+'::'+currentAttributeVersion+'::'+currentObjectID+'?'+(new Date()).getTime();
+		divReference.ez(urlReference, {}, null, function() {
+				
 			dialogLoader.hide();
 			imageReference = divReference.find('img:first');
 			
@@ -125,7 +137,7 @@ $(document).ready(function() {
 	 * Handle Preview
 	 */
 	$('input.novenimagecropper_previewbutton').click(function() {
-		var urlPreview = URLPrefix+'/novimagecrop/crop/'+currentAttributeID+'/'+currentAttributeVersion+'/(mode)/preview?'+(new Date()).getTime();
+		var urlPreview = 'novimgcrop::crop::'+currentAttributeID+'::'+currentAttributeVersion+'::preview';
 		var params = {
 			'x': getCropValue('x'),
 			'y': getCropValue('y'),
@@ -134,7 +146,7 @@ $(document).ready(function() {
 		};
 		
 		dialogLoader.show();
-		divPreview.load(urlPreview, params, function() {
+		divPreview.ez(urlPreview, params, null, function() {
 			dialogLoader.hide();
 			divReferenceArea.hide();
 			divPreviewArea.show();
@@ -158,7 +170,7 @@ $(document).ready(function() {
 	});
 	
 	$('input.novenimagecropper_savebutton').click(function() {
-		var urlCrop = URLPrefix+'/novimagecrop/crop/'+currentAttributeID+'/'+currentAttributeVersion+'/(mode)/do?'+(new Date()).getTime();
+		var urlCrop = 'novimgcrop::crop::'+currentAttributeID+'::'+currentAttributeVersion+'::do';
 		var params = {
 			'x': getCropValue('x'),
 			'y': getCropValue('y'),
@@ -167,7 +179,7 @@ $(document).ready(function() {
 		};
 		
 		dialogLoader.show();
-		$.post(urlCrop, params, function() {
+		$.ez(urlCrop, params, function() {
 			dialogLoader.hide();
 			refreshImageDetails(currentAttributeID, currentAttributeVersion, currentObjectID);
 			divDialog.dialog('close');
@@ -214,12 +226,13 @@ function closeDialog() {
  * Delete temporary cropped image for preview
  */
 function deleteTmpImage() {
-	var url = URLPrefix+'/novimagecrop/deletetmpimage/'+currentAttributeID+'/'+currentAttributeVersion;
-	$.get(url);
+	var url = 'novimgcrop::deleteTmpImage::'+currentAttributeID+'::'+currentAttributeVersion;
+	$.ez(url);
 }
 
 function refreshImageDetails(attributeId, contentObjectVersion, contentObjectId) {
-	$('#imageinfos_'+attributeId).load(URLPrefix+'/novimagecrop/refreshimage/'+attributeId+'/'+contentObjectVersion+'/'+contentObjectId+'?'+(new Date()).getTime());
+	var url = 'novimgcrop::refreshImage::'+attributeId+'::'+contentObjectVersion+'::'+contentObjectId+'?'+(new Date()).getTime();
+	$('#imageinfos_'+attributeId).ez(url);
 	
 	var buttonCrop = $('#novimagecroptrigger_'+attributeId+'_'+contentObjectVersion); 
 	buttonCrop.removeClass('button-deleted');

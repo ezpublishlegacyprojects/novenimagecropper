@@ -3,4 +3,7 @@
 [RegionalSettings]
 TranslationExtensions[]=novenimagecropper
 
+[SSLZoneSettings] 
+ModuleViewAccessMode[novimagecrop/*]=keep
+
 */

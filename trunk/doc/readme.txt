@@ -6,13 +6,21 @@ Noven Image Cropper
 ===============
 This extension adds 2 main new features for the ezimage attributes :
 * Ajax Upload. You don't need to publish your content object to preview your uploaded image. Note that this feature is not currently supported on IE6 (works on IE7 and IE8)
-* Interactive Cropping interface. A new Crop Image button has been added. Clicking on it will show you an inline popup dialog with an interface to select your crop area. Then preview the render and save it if it suits you !
+* Interactive Cropping interface. A new Crop Image button has been added. Clicking on it will show you an inline popup dialog with an interface to select your crop area. 
+  Then preview the render and save it if it suits you !
+This extension has been developped on top of ezjscore extension (http://projects.ez.no/ezjscore)
 
 2/ Install
 ==========
+This extension has a dependency on ezjscore extension (http://projects.ez.no/ezjscore). It MUST be properly installed 
+Note that this extension will be bundled with eZ Publish from version 4.3
+
+* Be sure that ezjscore has been properly installed and activated
 * Download the compressed file under /extension directory and uncompress it.
 * Activate the extension
+* Regenerate the autoload array for the extensions : php bin/php/ezpgenerateautoloads.php -e
 * Clear the caches
+* Give access to "novimagecrop" module to your contributors
 
 3/ Usage
 ========

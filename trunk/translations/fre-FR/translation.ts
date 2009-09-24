@@ -44,5 +44,9 @@
         <source>Please make a selection to crop your image</source>
         <translation>Faites une sélection pour rogner votre image</translation>
     </message>
+    <message>
+        <source>Uploaded file is not a supported image file (PNG/JPG/GIF)</source>
+        <translation>Le fichier chargé n'est pas un fichier image supporté (PNG/JPG/GIF)</translation>
+    </message>
 </context>
 </TS>

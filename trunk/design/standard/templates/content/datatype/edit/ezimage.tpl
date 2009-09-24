@@ -1,3 +1,6 @@
+{ezcss_require( array( 'novenimagecropper.css', 'jquery-ui-novenimagecropper.css', 'jquery.Jcrop.css' ) )}
+{ezscript_require( array( 'ezjsc::jquery', 'ezjsc::jqueryio', 'jquery-ui-novenimagecropper.min.js', 'jquery.Jcrop.min.js', 'ajaxupload.3.5.js', 'novenimagecropper.js' ) )}
+
 {default attribute_base='ContentObjectAttribute'}
 {let attribute_content=$attribute.content}
 
@@ -39,6 +42,7 @@
 {* New image file for upload. *}
 <div class="block">
     <div id="novenimageloading_{$attribute.id}" style="display:none;"><img src={"noven-image-ajax-loader.gif"|ezimage}/></div>
+    <div id="novenimagemimetypeerror_{$attribute.id}" class="novenerror" style="display:none;">{"Uploaded file is not a supported image file (PNG/JPG/GIF)"|i18n('extension/novenimagecropper/error')}</div>
     <input type="hidden" name="MAX_FILE_SIZE" value="{$attribute.contentclass_attribute.data_int1|mul( 1024, 1024 )}" />
     <label>{'New image file for upload'|i18n( 'design/standard/content/datatype' )}:</label>
     <input id="ezcoa-{if ne( $attribute_base, 'ContentObjectAttribute' )}{$attribute_base}-{/if}{$attribute.contentclassattribute_id}_{$attribute.contentclass_attribute_identifier}_file" class="box ezcc-{$attribute.object.content_class.identifier} ezcca-{$attribute.object.content_class.identifier}_{$attribute.contentclass_attribute_identifier} novenimageuploader" name="{$attribute_base}_data_imagename_{$attribute.id}" ez_contentobject_version="{$attribute.version}" ez_contentobject_id="{$attribute.contentobject_id}" type="file" />

@@ -1,0 +1,12 @@
+Noven Image Cropper
+2009 Jerome Vieilledent - Noven
+
+1.0 RC1
+------------------
+* Global refactoring to use ezjscore (http://projects.ez.no/ezjscore)
+* Added dependency on ezjscore extension
+* Fixed problems with different access modes used by eZ Publish (VHost, URI, index.php...)
+
+1.0 beta 1
+------------------
+Initial beta release

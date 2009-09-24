@@ -23,7 +23,7 @@ class novenimagecropperInfo
     static function info()
     {
         return array( 'Name' => "Noven Image Cropper",
-                      'Version' => "1.0 RC1",
+                      'Version' => "@@@VERSION@@@",
         			  'Author'	=> 'Jérôme Vieilledent',
                       'Copyright' => "Copyright © 2009 NOVEN",
                       'License' => "GNU General Public License v2.0",

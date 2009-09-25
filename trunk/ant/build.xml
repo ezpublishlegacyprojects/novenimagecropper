@@ -27,7 +27,7 @@
 	
 	<target name="package" depends="init,export" description="Builds the package">
 		<replace dir="${build.dir.dist}" token="@@@VERSION@@@" value="${build.version}">
-			<include name="**/*.php"/>
+			<include name="**/*"/>
 		</replace>
 		<zip destfile="${build.dir}/novenimagecropper.zip" basedir="${build.dir.dist}" excludes="novenimagecropper/ant/**"/>
 	</target>

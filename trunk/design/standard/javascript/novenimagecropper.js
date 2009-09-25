@@ -115,12 +115,7 @@ $(document).ready(function() {
 			dialogLoader.hide();
 			imageReference = divReference.find('img:first');
 			
-			// Delete query string because of jQuery bug. It can't get image size if query string is present
-			//var imageSrc = imageReference.attr('src');
-			//imageSrc = imageSrc.replace(/\?.+/g, '');
-			//imageReference.attr('src', imageSrc);
-			
-			setTimeout('initJCrop()', 250);
+			setTimeout('initJCrop()', 500);
 		});
 	});
 	
@@ -243,4 +238,13 @@ function refreshImageDetails(attributeId, contentObjectVersion, contentObjectId)
 	buttonDeleteImage.removeClass('button-deleted');
 	buttonDeleteImage.addClass('button');
 	buttonDeleteImage.removeAttr('disabled');
+}
+
+function updateImage(imagePath, attributeId, contentObjectVersion, contentObjectId, fromElt, toElt) {
+	var url = 'novimgcrop::updateImageByPath::'+attributeId+'::'+contentObjectVersion;
+	var postData = {'imagePath': imagePath};
+	$.ez(url, postData, function() {
+		refreshImageDetails(attributeId, contentObjectVersion, contentObjectId);
+		callBackLoadImg(fromElt, toElt );
+	});
 }

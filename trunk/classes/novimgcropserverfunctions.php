@@ -109,9 +109,12 @@ class NovImgCropServerFunctions extends ezjscServerFunctionsJs
 			$imageHandler = $attribute->content();
 			
 			$referenceAlias = $imageHandler->attribute('reference'); // Cropping UI is based on "reference" alias
-			$referencePath = $fileHandler->fileFetch($referenceAlias['url']);
+			$fileHandler->filePath = $referencePath = $referenceAlias['url'];
+			$fileHandler->fetch();
+			
 			$originalAlias = $imageHandler->attribute('original');
-			$originalPath = $fileHandler->fileFetch($originalAlias['url']);
+			$fileHandler->filePath = $originalPath = $originalAlias['url'];
+			$fileHandler->fetch();
 			$ratio = $originalAlias['width'] / $referenceAlias['width']; // Ratio between "original" and "reference" aliases. Will be applicated on posted coords
 			
 			// Posted coords
@@ -189,6 +192,10 @@ class NovImgCropServerFunctions extends ezjscServerFunctionsJs
 				$fileHandler->fileDelete($tmpImage);
 				$content = null;
 			}
+			
+			// Delete files fetched from DB to FS, in case of cluster mode
+			$fileHandler->fileDeleteLocal($originalAlias);
+			$fileHandler->fileDeleteLocal($referenceAlias);
 		}
 		catch(Exception $e)
 		{
@@ -202,7 +209,7 @@ class NovImgCropServerFunctions extends ezjscServerFunctionsJs
 	/**
 	 * Delete the temporary image used for the preview
 	 * @param array $args Ordered values are : AttributeID, ContentObjectVersion
-	 * @return null
+	 * @return void
 	 */
 	public static function deleteTmpImage( array $args )
 	{
@@ -230,5 +237,26 @@ class NovImgCropServerFunctions extends ezjscServerFunctionsJs
 	public static function getURLPrefix( array $args=null )
 	{
 		return self::getIndexDir();
+	}
+	
+	public static function updateImageByPath( array $args )
+	{
+		self::init();
+		
+		$newImagePath = self::$http->postVariable('imagePath');
+		$AttributeID = $args[0];
+		$ContentObjectVersion = $args[1];
+		$fileHandler = eZClusterFileHandler::instance();
+		
+		$newImagePath = $fileHandler->fileFetch($newImagePath);
+		$newImagePath = realpath($newImagePath);
+		$imageAttribute = eZContentObjectAttribute::fetch($AttributeID, $ContentObjectVersion);
+		$imageAttribute->fromString($newImagePath);
+		$imageAttribute->store();
+		
+		// Now delete local image
+		$fileHandler->deleteLocal($newImagePath);
+		
+		return 'success';
 	}
 }

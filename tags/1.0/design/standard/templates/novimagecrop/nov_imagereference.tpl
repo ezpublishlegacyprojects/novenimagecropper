@@ -1,1 +1,0 @@
-<img src="{concat($attribute.content.reference.url|ezroot('no'), '?', currentdate())}" />

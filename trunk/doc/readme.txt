@@ -15,7 +15,7 @@ This extension has been developped on top of ezjscore extension (http://projects
 This extension has a dependency on ezjscore extension (http://projects.ez.no/ezjscore). It MUST be properly installed 
 Note that this extension will be bundled with eZ Publish from version 4.3
 
-* Be sure that ezjscore has been properly installed and activated
+* Be sure that ezjscore has been properly installed and activated (NovenImageCropper uses jQuery as default framework)
 * Download the compressed file under /extension directory and uncompress it.
 * Activate the extension
 * Regenerate the autoload array for the extensions : php bin/php/ezpgenerateautoloads.php -e

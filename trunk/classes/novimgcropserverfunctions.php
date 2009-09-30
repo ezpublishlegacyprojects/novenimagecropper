@@ -248,7 +248,8 @@ class NovImgCropServerFunctions extends ezjscServerFunctionsJs
 		$ContentObjectVersion = $args[1];
 		$fileHandler = eZClusterFileHandler::instance();
 		
-		$newImagePath = $fileHandler->fileFetch($newImagePath);
+		$fileHandler->filePath = $newImagePath;
+		$fileHandler->fetch();
 		$newImagePath = realpath($newImagePath);
 		$imageAttribute = eZContentObjectAttribute::fetch($AttributeID, $ContentObjectVersion);
 		$imageAttribute->fromString($newImagePath);

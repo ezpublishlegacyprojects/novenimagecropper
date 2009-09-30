@@ -1,6 +1,10 @@
 Noven Image Cropper
 2009 Jerome Vieilledent - Noven
 
+1.0.1
+------------------
+* Fixed problem with server callback function NovImgCropServerFunctions::updateImageByPath()
+
 1.0
 ------------------
 * Fixed problems with eZFS/eZFS2

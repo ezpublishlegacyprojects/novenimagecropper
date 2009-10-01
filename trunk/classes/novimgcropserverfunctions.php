@@ -239,6 +239,11 @@ class NovImgCropServerFunctions extends ezjscServerFunctionsJs
 		return self::getIndexDir();
 	}
 	
+	/**
+	 * Update the image attribute from a path
+	 * @param array $args Ordered values are : AttributeID, ContentObjectVersion
+	 * @return string
+	 */
 	public static function updateImageByPath( array $args )
 	{
 		self::init();

@@ -1,6 +1,13 @@
 Noven Image Cropper
 2009 Jerome Vieilledent - Noven
 
+1.0.2
+------------------
+* Callback function updateImage() now sends a jQuery event when update is finished
+* Add JSDoc on updateImage() function
+* Add PHPDoc on NovImgCropServerFunctions::updateImageByPath() server function
+* Updated doc
+
 1.0.1
 ------------------
 * Fixed problem with server callback function NovImgCropServerFunctions::updateImageByPath()

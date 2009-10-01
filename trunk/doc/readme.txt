@@ -33,7 +33,26 @@ Note that this extension will be bundled with eZ Publish from version 4.3
 * Once your selection is made, click the "Preview" button
 * If the render suits you, click the "Save" button. You can go back to your selection by clicking the "Back to selection" button
 
-4/ Issues
+4/ Update image attribute externally
+====================================
+NovenImageCropper embeds a JS callback function "updateImage()" which allows you to update the ezimage attribute externally.
+This allows you cross attribute editing.
+When called, the function updates the right ezimage attribute and sends a jQuery event on the parent of the image when update process is finished. 
+Name of the event is "novimgcrop.image_updated".
+A "cropData" property is added on the jQuery event. It embeds various infos concerning the attribute that has been updated :
+  * attributeId
+  * contentObjectVersion
+  * contentObjectId
+
+To get these infos :
+$('.imageinfos_image').bind('novimgcrop.image_updated', function(event) {
+  var attributeData = event.cropData;
+  var attributeId = event.attributeId;
+  var contentObjectVersion = event.contentObjectVersion;
+  var contentObjectId = event.contentObjectId;
+});
+
+5/ Issues
 =========
 * If you use the cluster mode (eZDB), there is an issue on the script rendering images. Please refer to this ezpublish issue : http://issues.ez.no/IssueView.php?Id=15459 . Until this issue is not fixed, you'll have to patch your index_image_mysql.php file (or the one matching your cluster backend)
 * Ajax upload is not currently supported on IE6 due to a limitation on the Ajax Upload library. So you'll have to select your file and, publish your object (as you should be used to), and then re-edit your object to be able to crop your brand new uploaded image

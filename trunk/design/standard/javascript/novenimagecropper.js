@@ -35,7 +35,9 @@ var URLPrefix = '';
 
 $(document).ready(function() {
 	
-	
+	$('.imageinfos_image').bind('novimgcrop.image_updated', function(event) {
+		console.log(event);
+	});
 	/**
 	 * AJAX image upload handler
 	 * @uses AjaxUpload - http://valums.com/ajax-upload/
@@ -229,7 +231,7 @@ function refreshImageDetails(attributeId, contentObjectVersion, contentObjectId)
 	var url = 'novimgcrop::refreshImage::'+attributeId+'::'+contentObjectVersion+'::'+contentObjectId+'?'+(new Date()).getTime();
 	$('#imageinfos_'+attributeId).ez(url);
 	
-	var buttonCrop = $('#novimagecroptrigger_'+attributeId+'_'+contentObjectVersion); 
+	var buttonCrop = $('#novimagecroptrigger_'+attributeId+'_'+contentObjectVersion+'_'+contentObjectId); 
 	buttonCrop.removeClass('button-deleted');
 	buttonCrop.addClass('button');
 	buttonCrop.removeAttr('disabled');
@@ -240,11 +242,23 @@ function refreshImageDetails(attributeId, contentObjectVersion, contentObjectId)
 	buttonDeleteImage.removeAttr('disabled');
 }
 
-function updateImage(imagePath, attributeId, contentObjectVersion, contentObjectId, fromElt, toElt) {
+/**
+ * Callback function that can be called externally to update the image attribute (from another attribute for ex.)
+ * @param imagePath New image path
+ * @param attributeId
+ * @param contentObjectVersion
+ * @param contentObjectId
+ * @return void
+ */
+function updateImage(imagePath, attributeId, contentObjectVersion, contentObjectId) {
 	var url = 'novimgcrop::updateImageByPath::'+attributeId+'::'+contentObjectVersion;
 	var postData = {'imagePath': imagePath};
 	$.ez(url, postData, function() {
 		refreshImageDetails(attributeId, contentObjectVersion, contentObjectId);
-		callBackLoadImg(fromElt, toElt );
+		
+		// Send an event on the corresponding element (parent of the image) to notify that image update is OK
+		var evt = $.Event('novimgcrop.image_updated');
+		evt.cropData = {'attributId': attributeId, 'contentObjectVersion': contentObjectVersion, 'contentObjectId': contentObjectId};
+		$('#imageinfos_'+attributeId+' .imageinfos_image').trigger(evt);
 	});
 }

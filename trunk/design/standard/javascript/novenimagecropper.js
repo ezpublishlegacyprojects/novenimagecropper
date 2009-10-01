@@ -35,9 +35,6 @@ var URLPrefix = '';
 
 $(document).ready(function() {
 	
-	$('.imageinfos_image').bind('novimgcrop.image_updated', function(event) {
-		console.log(event);
-	});
 	/**
 	 * AJAX image upload handler
 	 * @uses AjaxUpload - http://valums.com/ajax-upload/

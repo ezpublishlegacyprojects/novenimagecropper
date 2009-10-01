@@ -256,6 +256,6 @@ function updateImage(imagePath, attributeId, contentObjectVersion, contentObject
 		// Send an event on the corresponding element (parent of the image) to notify that image update is OK
 		var evt = $.Event('novimgcrop.image_updated');
 		evt.cropData = {'attributId': attributeId, 'contentObjectVersion': contentObjectVersion, 'contentObjectId': contentObjectId};
-		$('#imageinfos_'+attributeId+' .imageinfos_image').trigger(evt);
+		$('#imageinfos_'+attributeId).trigger(evt);
 	});
 }

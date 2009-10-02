@@ -68,8 +68,13 @@
 				<select class="novenimagecropper_aspectratio" id="novimagecrop_ar_{$attribute.id}">
 					<option value="0">{"No aspect ratio"|i18n('extension/novenimagecropper')}</option>
 					{foreach $aAspectRatio as $label => $ratio}
-					
-					<option value="{$ratio}">{$label}</option>
+						
+						{def $width = 0
+							 $height = 0}
+						{if ezini_hasvariable($label, 'Width', 'novenimagecropper.ini')}{set $width = ezini($label, 'Width', 'novenimagecropper.ini')}{/if}
+						{if ezini_hasvariable($label, 'Height', 'novenimagecropper.ini')}{set $height = ezini($label, 'Height', 'novenimagecropper.ini')}{/if}
+					<option value="{$ratio}" width="{$width}" height="{$height}">{$label}</option>
+						{undef $width $height}
 					{/foreach}
 				</select>
 				<p>

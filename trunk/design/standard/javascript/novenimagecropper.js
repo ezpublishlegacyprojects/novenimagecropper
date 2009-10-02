@@ -123,7 +123,18 @@ $(document).ready(function() {
 	 */
 	$('.novenimagecropper_aspectratio').change(function() {
 		var ratio = $(this).val();
-		jcrop.setOptions({aspectRatio: parseFloat(ratio)});
+		var options = {aspectRatio: parseFloat(ratio)}; // Options for jCrop
+		var selectedOption = $(this).find('option:selected');
+		
+		// Do we have forced width/height ?
+		var width = parseInt(selectedOption.attr('width'));
+		var height = parseInt(selectedOption.attr('height'));
+		
+		jcrop.setOptions(options);
+		
+		if(width && height)
+			jcrop.animateTo([0, 0, width, height]);
+		
 		jcrop.focus();
 	});
 	
@@ -214,6 +225,7 @@ function closeDialog() {
 	deleteTmpImage();
 	divPreviewArea.hide();
 	divReferenceArea.show();
+	$('.novenimagecropper_aspectratio').val('0'); // Re-init the aspect ratio select box
 }
 
 /**

@@ -1,6 +1,11 @@
 Noven Image Cropper
 2009 Jerome Vieilledent - Noven
 
+1.0.3
+------------------
+* Added possibility to "force" crop width/height selection for an aspect ratio
+* Fixed bug when closing dialog : aspect ratio select box doesn't reset
+
 1.0.2
 ------------------
 * Callback function updateImage() now sends a jQuery event when update is finished

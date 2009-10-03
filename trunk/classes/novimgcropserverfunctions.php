@@ -135,6 +135,7 @@ class NovImgCropServerFunctions extends ezjscServerFunctionsJs
 					$w = $wRef * $ratio;
 					$h = $hRef * $ratio;
 					$aliasFrom = $originalAlias;
+					$fromPath = $originalPath;
 				break;
 				
 				case 'preview':
@@ -143,6 +144,7 @@ class NovImgCropServerFunctions extends ezjscServerFunctionsJs
 					$w = $wRef;
 					$h = $hRef;
 					$aliasFrom = $referenceAlias;
+					$fromPath = $referencePath;
 				break;
 				
 				default:
@@ -160,10 +162,10 @@ class NovImgCropServerFunctions extends ezjscServerFunctionsJs
 				new ezcImageFilter( 
 					'crop',
 					array( 
-						'x'			=> $xRef,
-						'y'			=> $yRef,
-						'width'		=> $wRef,
-						'height'	=> $hRef
+						'x'			=> $x,
+						'y'			=> $y,
+						'width'		=> $w,
+						'height'	=> $h
 					)
 				),
 			);
@@ -174,7 +176,7 @@ class NovImgCropServerFunctions extends ezjscServerFunctionsJs
 			
 			$converter->transform( 
 				'crop', 
-				$referencePath,
+				$fromPath,
 				$tmpImage
 			);
 			

@@ -72,7 +72,7 @@ $(document).ready(function() {
 				onComplete : function(file) {
 					// Hide loader and refresh image infos
 					$('#novenimageloading_'+attributeId).hide();
-					refreshImageDetails(attributeId, contentObjectVersion, contentObjectVersion);
+					refreshImageDetails(attributeId, contentObjectVersion, contentObjectId);
 				}
 			});
 		});

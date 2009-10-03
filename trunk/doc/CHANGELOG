@@ -1,6 +1,11 @@
 Noven Image Cropper
 2009 Jerome Vieilledent - Noven
 
+1.0.4
+------------------
+* Fixed "Extension allways uses reference alias of the image"
+* Fixed issue when uploading an image and no previous image was registered in object => "Crop" button was still disabled
+
 1.0.3
 ------------------
 * Added possibility to "force" crop width/height selection for an aspect ratio

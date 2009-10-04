@@ -162,10 +162,10 @@ class NovImgCropServerFunctions extends ezjscServerFunctionsJs
 				new ezcImageFilter( 
 					'crop',
 					array( 
-						'x'			=> $x,
-						'y'			=> $y,
-						'width'		=> $w,
-						'height'	=> $h
+						'x'			=> (int)$x,
+						'y'			=> (int)$y,
+						'width'		=> (int)$w,
+						'height'	=> (int)$h
 					)
 				),
 			);

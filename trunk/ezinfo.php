@@ -22,7 +22,7 @@ class novenimagecropperInfo
 {
     static function info()
     {
-        return array( 'Name' => "Noven Image Cropper",
+        return array( 'Name' => '<a href="http://projects.ez.no/novenimagecropper" target="_blank">Noven Image Cropper</a>',
                       'Version' => "@@@VERSION@@@",
         			  'Author'	=> 'Jérôme Vieilledent',
                       'Copyright' => "Copyright © 2009 NOVEN",

@@ -7,6 +7,7 @@ Noven Image Cropper
 * Updated french translation and untranslated file with right doctype
 * Fixed issue with ezcImageConverterSettings if ImageMagick is not present in the system. Now takes into account settings from image.ini
 * Fixed PHP warning in modules/novimagecrop/upload.php. Image content attribute was not passed to eZContentObjectAttribute::store() method
+* Added new aspect ratios
 
 1.0.5
 ------------------

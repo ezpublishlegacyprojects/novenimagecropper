@@ -1,6 +1,18 @@
 Noven Image Cropper
 2009 Jerome Vieilledent - Noven
 
+1.0.6
+------------------
+* Added german translation (thanks Marco Zinn for your contribution !)
+* Updated french translation and untranslated file with right doctype
+* Fixed issue with ezcImageConverterSettings if ImageMagick is not present in the system. Now takes into account settings from image.ini
+* Fixed PHP warning in modules/novimagecrop/upload.php. Image content attribute was not passed to eZContentObjectAttribute::store() method
+
+1.0.5
+------------------
+* Fixed potential problems with params for ezcImageFilter. Must be int
+* Deleted obsolete view scripts for the module 'novimagecrop'
+
 1.0.4
 ------------------
 * Fixed "Extension allways uses reference alias of the image"

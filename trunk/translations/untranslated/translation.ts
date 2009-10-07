@@ -1,4 +1,6 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="fr_FR" sourcelanguage="en">
 <context>
     <name>extension/novenimagecropper</name>
     <message>
@@ -46,6 +48,10 @@
     </message>
     <message>
         <source>Uploaded file is not a supported image file (PNG/JPG/GIF)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Neither ImageMagick nor GD image handler is enabled ! Please check your image.ini configuration</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

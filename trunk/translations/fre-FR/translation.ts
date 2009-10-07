@@ -50,5 +50,9 @@
         <source>Uploaded file is not a supported image file (PNG/JPG/GIF)</source>
         <translation>Le fichier chargé n'est pas un fichier image supporté (PNG/JPG/GIF)</translation>
     </message>
+    <message>
+        <source>Neither ImageMagick nor GD image handler is enabled ! Please check your image.ini configuration</source>
+        <translation>Le gestionnaire d'image ImageMagick ou GD n'est pas activé ! Vérifiez votre configuration dans image.ini</translation>
+    </message>
 </context>
 </TS>

@@ -2,7 +2,7 @@
 //
 // ## BEGIN COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
 // SOFTWARE NAME: Noven Image Cropper
-// SOFTWARE RELEASE: @@@VERSION@@@
+// SOFTWARE RELEASE: 1.0.3
 // COPYRIGHT NOTICE: Copyright (C) 2009 - Jerome Vieilledent, Noven.
 // SOFTWARE LICENSE: GNU General Public License v2.0
 // NOTICE: >
@@ -151,11 +151,21 @@ class NovImgCropServerFunctions extends ezjscServerFunctionsJs
 					throw new InvalidArgumentException(ezi18n('extension/novenimagecropper/error', 'Invalid crop mode'));
 			}
 			
+			// Determine which image handler to use
+			$imageINI = eZINI::instance('image.ini');
+			$imageMagickEnabled = $imageINI->variable('ImageMagick', 'IsEnabled') == 'true';
+			$GDEnabled = $imageINI->variable('GD', 'IsEnabled') == 'true';
+			if($imageMagickEnabled)
+				$imageHandler = new ezcImageHandlerSettings( 'ImageMagick', 'ezcImageImagemagickHandler' );
+			else if($GDEnabled)
+				$imageHandler = new ezcImageHandlerSettings( 'GD', 'ezcImageGdHandler' );
+			else
+				throw new InvalidArgumentException(ezi18n('extension/novenimagecropper/error', 'Neither ImageMagick nor GD handler is enabled ! Please check your image.ini configuration'));
+			
 			// Cropping w/ eZ Components
 			$settings = new ezcImageConverterSettings(
 				array(
-					new ezcImageHandlerSettings( 'ImageMagick', 'ezcImageImagemagickHandler' ),
-					new ezcImageHandlerSettings( 'GD', 'ezcImageGdHandler' ),
+					$imageHandler
 				)
 			);
 			$filters = array( 

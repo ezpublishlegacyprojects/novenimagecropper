@@ -3,7 +3,7 @@
 //
 // ## BEGIN COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
 // SOFTWARE NAME: Noven Image Cropper
-// SOFTWARE RELEASE: @@@VERSION@@@
+// SOFTWARE RELEASE: 1.0.3
 // COPYRIGHT NOTICE: Copyright (C) 2009 - Jerome Vieilledent, Noven.
 // SOFTWARE LICENSE: GNU General Public License v2.0
 // NOTICE: >
@@ -37,7 +37,7 @@ $contentObjectID = $http->postVariable('ContentObjectID');
 $imageAttribute = eZContentObjectAttribute::fetch($attributeID, $contentObjectVersion);
 $imageHandler = $imageAttribute->content();
 $imageHandler->initializeFromHTTPFile($httpFile, '');
-$imageHandler->store();
+$imageHandler->store($imageAttribute);
 
 $Result['pagelayout'] = '';
 $Result['content'] = '';

@@ -21,6 +21,13 @@ Note that this extension will be bundled with eZ Publish from version 4.3
 * Regenerate the autoload array for the extensions : php bin/php/ezpgenerateautoloads.php -e
 * Clear the caches
 * Give access to "novimagecrop" module to your contributors
+* Be sure you have a "reference" alias declared in image.ini
+  It is enabled by default but check your siteaccess override (especially if you use ezwebin frontend editing) :
+    AliasList[]=reference
+
+    [reference]
+    Filters[]
+    Filters[]=geometry/scaledownonly=600;600
 
 3/ Usage
 ========

@@ -108,7 +108,7 @@ class NovImgCropServerFunctions extends ezjscServerFunctionsJs
 			$attribute = eZContentObjectAttribute::fetch($AttributeID, $ContentObjectVersion);
 			$imageHandler = $attribute->content();
 			
-			$referenceAlias = $imageHandler->attribute('reference'); // Cropping UI is based on "reference" alias
+			$referenceAlias = $imageHandler->attribute('novenimagecropper_reference'); // Cropping UI is based on "novenimagecropper_reference" alias
 			$fileHandler->filePath = $referencePath = $referenceAlias['url'];
 			$fileHandler->fetch();
 			

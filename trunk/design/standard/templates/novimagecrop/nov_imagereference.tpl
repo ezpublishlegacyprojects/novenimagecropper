@@ -1,1 +1,1 @@
-<img src="{concat($attribute.content.reference.url|ezroot('no'), '?', currentdate())}" />
+<img src="{concat($attribute.content.novenimagecropper_reference.url|ezroot('no'), '?', currentdate())}" />

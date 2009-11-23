@@ -132,8 +132,10 @@ $(document).ready(function() {
 		
 		jcrop.setOptions(options);
 		
-		if(width && height)
-			jcrop.animateTo([0, 0, width, height]);
+		if(width == 0 || height == 0) { // Set default width/height
+			width = 350;
+			height = width / ratio;
+		}
 		
 		jcrop.focus();
 	});

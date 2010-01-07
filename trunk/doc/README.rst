@@ -31,7 +31,7 @@ Note that this extension is bundled with eZ Publish 4.2 with *ezwebin*
   - Regenerate the autoload array for the extensions : *php
     bin/php/ezpgenerateautoloads.php -e*
   - Clear the caches
-  - Give access to "novimagecrop" module to your contributors
+  - Give access to **novimagecrop** module to your contributors
 
 
 Usage
@@ -91,4 +91,3 @@ and then re-edit your object to be able to crop your brand new uploaded image
 
 Feel free to report any issue or feedback on the forum : http://projects.ez.no/novenimagecropper/forum
 
-vim: et sts ts=4 sw=4 syn=rst tw=80

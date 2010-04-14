@@ -48,7 +48,7 @@ $(document).ready(function() {
 		var curEl = $(this);
 		
 		// Get the URLPrefix (only for AJAX upload feature)
-		$.ez('novimgcrop::getURLPrefix', function(data) {
+		$.ez('novimgcrop::getURLPrefix', null, function(data) {
 			URLPrefix = data.content;
 			new AjaxUpload(curEl, {
 				action: URLPrefix+'novimagecrop/upload',

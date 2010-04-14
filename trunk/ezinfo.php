@@ -27,10 +27,10 @@ class novenimagecropperInfo
         			  'Author'	=> 'Jérôme Vieilledent',
                       'Copyright' => "Copyright © 2009 NOVEN",
                       'License' => "GNU General Public License v2.0",
-                      'Includes the following libraries'              => array( 'jQuery' => 'v1.3.2 http://jquery.com',
-                                                                              'jQuery UI' => 'v1.7.2 http://jqueryui.com',
+                      'Includes the following libraries'              => array( 'jQuery' => 'v1.4.2 http://jquery.com',
+                                                                              'jQuery UI' => 'v1.8 http://jqueryui.com',
                                                                               'jCrop' => 'v0.9.8 http://deepliquid.com/content/Jcrop.html',
-                                                                              'Ajax Upload' => 'v3.5 http://valums.com/ajax-upload/',
+                                                                              'Ajax Upload' => 'v3.9 http://valums.com/ajax-upload/',
                                                                               'eZ Components' => 'http://ezcomponents.org/')
                       );
     }

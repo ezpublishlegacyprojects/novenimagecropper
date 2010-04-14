@@ -43,10 +43,19 @@ class NovImgCropServerFunctions extends ezjscServerFunctionsJs
 	
 	private static function init()
 	{
-		include_once( "kernel/common/template.php" );
-		include_once( "kernel/common/i18n.php" );
-		self::$tpl = templateInit();
 		self::$http = eZHTTPTool::instance();
+		
+		// eZ Publish < 4.3 => Use old API for template init and required includes
+		if(eZPublishSDK::majorVersion() >= 4 && eZPublishSDK::minorVersion() < 3)
+		{
+			include_once( "kernel/common/template.php" );
+			include_once( "kernel/common/i18n.php" );
+			self::$tpl = templateInit();
+		}
+		else
+		{
+			self::$tpl = eZTemplate::factory();
+		}
 	}
 	
 	/**
@@ -124,7 +133,7 @@ class NovImgCropServerFunctions extends ezjscServerFunctionsJs
 			$hRef = (int)self::$http->postVariable('h', 0);
 			
 			if(!$wRef || !$hRef)
-				throw new InvalidArgumentException(ezi18n('extension/novenimagecropper/error', 'Please make a selection to crop your image'));
+				throw new InvalidArgumentException(self::translateMessage('extension/novenimagecropper/error', 'Please make a selection to crop your image'));
 			
 			// Adapt coords if needed
 			switch($Mode)
@@ -148,7 +157,7 @@ class NovImgCropServerFunctions extends ezjscServerFunctionsJs
 				break;
 				
 				default:
-					throw new InvalidArgumentException(ezi18n('extension/novenimagecropper/error', 'Invalid crop mode'));
+					throw new InvalidArgumentException(self::translateMessage('extension/novenimagecropper/error', 'Invalid crop mode'));
 			}
 			
 			// Determine which image handler to use
@@ -160,7 +169,7 @@ class NovImgCropServerFunctions extends ezjscServerFunctionsJs
 			else if($GDEnabled)
 				$imageHandler = new ezcImageHandlerSettings( 'GD', 'ezcImageGdHandler' );
 			else
-				throw new InvalidArgumentException(ezi18n('extension/novenimagecropper/error', 'Neither ImageMagick nor GD handler is enabled ! Please check your image.ini configuration'));
+				throw new InvalidArgumentException(self::translateMessage('extension/novenimagecropper/error', 'Neither ImageMagick nor GD handler is enabled ! Please check your image.ini configuration'));
 			
 			// Cropping w/ eZ Components
 			$settings = new ezcImageConverterSettings(
@@ -276,5 +285,30 @@ class NovImgCropServerFunctions extends ezjscServerFunctionsJs
 		$fileHandler->deleteLocal($newImagePath);
 		
 		return 'success';
+	}
+	
+	/**
+	 * Abstract method to translate labels and eventually takes advantage of new 4.3 i18n API
+	 * @param $context
+	 * @param $message
+	 * @param $comment
+	 * @param $argument
+	 * @return string
+	 */
+	public static function translateMessage($context, $message, $comment=null, $argument=null)
+	{
+		$translated = '';
+		
+		// eZ Publish < 4.3 => use old i18n system
+		if(eZPublishSDK::majorVersion() >= 4 && eZPublishSDK::minorVersion() < 3)
+		{
+			$translated = ezi18n($context, $message, $comment, $argument);
+		}
+		else
+		{
+			$translated = ezpI18n::tr($context, $message, $comment, $argument);
+		}
+		
+		return $translated;
 	}
 }

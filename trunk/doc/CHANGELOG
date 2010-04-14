@@ -1,6 +1,13 @@
 Noven Image Cropper
 2009 Jerome Vieilledent - Noven
 
+1.1.0
+------------------
+* Upgraded jQuery (1.4.2) and jQuery UI (1.8)
+* Upgraded AjaxUpload (3.9)
+* Fixed a small compatibility bug with eZJSCore 1.1 (thanks Sebastien Morel)
+* Now uses ezpI18n::tr() and eZTemplate::factory(), introduced in eZ Publish 4.3 (backwards compatibility is maintained)
+
 1.0.6
 ------------------
 * Added german translation (thanks Marco Zinn for your contribution !)

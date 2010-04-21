@@ -1,6 +1,10 @@
 Noven Image Cropper
 2009 Jerome Vieilledent - Noven
 
+1.1.1
+------------------
+* Added Norwegian translation (thanks HŒvard Bergersen for your contribution !)
+
 1.1.0
 ------------------
 * Upgraded jQuery (1.4.2) and jQuery UI (1.8)

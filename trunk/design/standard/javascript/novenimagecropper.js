@@ -62,7 +62,7 @@ $(document).ready(function() {
 				onSubmit : function(file, ext) {
 					$('#novenimageloading_'+attributeId).show(); // Display loader
 					$('#novenimagemimetypeerror_'+attributeId).hide(); // Hide errors
-					if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){
+					if (! (ext && /^(jpg|png|jpeg|gif)$/i.test(ext))){
 						// extension is not allowed, cancel upload
 						$('#novenimageloading_'+attributeId).hide();
 						$('#novenimagemimetypeerror_'+attributeId).show();

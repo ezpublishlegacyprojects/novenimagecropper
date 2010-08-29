@@ -4,6 +4,7 @@ Noven Image Cropper
 1.1.1
 ------------------
 * Added Norwegian translation (thanks HŒvard Bergersen for your contribution !)
+* Fixed issue with uppercase image file extensions
 
 1.1.0
 ------------------
